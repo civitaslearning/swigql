@@ -1,0 +1,32 @@
+{
+  "name": "swigql",
+  "version": "0.0.1",
+  "description": "swig templating for SQL",
+  "contributors": [
+  	{
+  		"name": "Dan Harbin",
+  		"web": "https://github.com/RasterBurn"
+	}
+  ],
+
+  "keywords": [
+    "postgres",
+    "pg",
+    "swig",
+    "template",
+    "sql"
+  ],
+  "author": "Dan Harbin <dan.harbin@civitaslearning.com>",
+  "main": "./lib",
+  "repository": {
+  	"type": "git",
+  	"url": "https://github.com/civitaslearning/swigql.git"
+  },
+  "dependencies": {
+    "underscore": "~1.4.4"
+  },
+  "devDependencies": {
+  	"nodeunit": "*"
+  },
+  "license": "MIT"
+}
