@@ -20,7 +20,7 @@ WHERE
   first_name = {% bind fn %}
   AND (
   {%- for ln in last_names -%}
-      {% if loop.index > 1 %}OR {% endif %}{% bind ln %}
+      {% if loop.index > 1 %}OR {% endif %}last_name = {% bind ln %}
   {% endfor -%}
   )
 ```
@@ -30,7 +30,7 @@ WHERE
 ```javascript
 var swigql = require('swigql');
 
-var tmpl = swigql.compileFile('/path/to/template.html');
+var tmpl = swigql.compileFile('/path/to/template.sql');
 var results = tmpl.render({
 	fn: 'James',
 	last_names: ['Franklin', 'Cooper', 'Smitty', 'Black']
@@ -42,7 +42,7 @@ console.log(results);
 ### Output
 
 ```
-[ 'SELECT\n  id\n  , first_name\n  , last_name\nFROM person\nWHERE\n  first_name = $1\n  AND ($2\n OR $3\n OR $4\n OR $5\n )',
+[ 'SELECT\n  id\n  , first_name\n  , last_name\nFROM person\nWHERE\n  first_name = $1\n  AND (last_name = $2\n OR last_name = $3\n OR last_name = $4\n OR last_name = $5\n )',
   [ 'James', 'Franklin', 'Cooper', 'Smitty', 'Black' ] ]
 ```
 
