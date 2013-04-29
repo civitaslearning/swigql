@@ -1,6 +1,6 @@
 {
   "name": "swigql",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "swig templating for SQL",
   "contributors": [
   	{
