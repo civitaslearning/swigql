@@ -62,3 +62,29 @@ exports["repeated use"] = function (test) {
 	test.done();
 	
 };
+
+exports["in tag"] = function (test) {
+	test.expect(2);
+
+	var txt = 'x {% in arr %} y',
+	render = swigql.compile(txt, { filename: 'in.sql' }),
+	results = render({ arr: [1,2,3,4,5] });
+
+	test.strictEqual(results[0], 'x ($1,$2,$3,$4,$5) y');
+	test.deepEqual(results[1], [1,2,3,4,5]);
+
+	test.done();
+};
+
+exports["in tag repeated replacement"] = function (test) {
+	test.expect(2);
+
+	var txt = 'x {% in arr1 %} y {% in arr2 %} z',
+	render = swigql.compile(txt, { filename: 'in_repeated.sql' }),
+	results = render({ arr1: [1,2,3,4,5], arr2: [5,4,3,2,1] });
+
+	test.strictEqual(results[0], 'x ($1,$2,$3,$4,$5) y ($5,$4,$3,$2,$1) z');
+	test.deepEqual(results[1], [1,2,3,4,5]);
+
+	test.done();
+};

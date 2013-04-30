@@ -18,11 +18,7 @@ SELECT
 FROM person
 WHERE
   first_name = {% bind fn %}
-  AND (
-  {%- for ln in last_names -%}
-      {% if loop.index > 1 %}OR {% endif %}last_name = {% bind ln %}
-  {% endfor -%}
-  )
+  AND last_name IN {% in last_names %}
 ```
 
 ### node.js code
@@ -42,7 +38,7 @@ console.log(results);
 ### Output
 
 ```
-[ 'SELECT\n  id\n  , first_name\n  , last_name\nFROM person\nWHERE\n  first_name = $1\n  AND (last_name = $2\n OR last_name = $3\n OR last_name = $4\n OR last_name = $5\n )',
+[ 'SELECT\n  id\n  , first_name\n  , last_name\nFROM person\nWHERE\n  first_name = $1\n  AND last_name IN ($2, $3, $4, $5)',
   [ 'James', 'Franklin', 'Cooper', 'Smitty', 'Black' ] ]
 ```
 
@@ -56,6 +52,9 @@ swigql is simply a wrapper around swig with two differences:
 2. Instead of returning just the output of the template, it also returns the
    bind parameters in an array suitable for passing to a database driver such
    as [node-postgres](https://github.com/brianc/node-postgres/wiki/pg).
+
+3. swigql also adds a tag named `in` which iterates over an array and creates
+   a string suitable for use with an IN statement.
 
 Bringing some powerful features of swig templating, such as [template
 inheritance](http://paularmstrong.github.com/swig/docs/#inheritance) opens the
@@ -81,7 +80,7 @@ WHERE 1=1
 ### Example sub query template
 
 ```
-{% extends 'base.html' %}
+{% extends 'base.sql' %}
 
 {% block select %}
 	{% parent %}
