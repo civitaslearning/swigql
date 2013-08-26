@@ -1,5 +1,7 @@
 # swigql
 
+[![Build Status](https://travis-ci.org/civitaslearning/swigql.png)](https://travis-ci.org/civitaslearning/swigql)
+
 [swig](https://github.com/paularmstrong/swig) templating for SQL
 
 ## Installation

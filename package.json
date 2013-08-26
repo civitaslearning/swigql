@@ -8,7 +8,9 @@
   		"web": "https://github.com/RasterBurn"
 	}
   ],
-
+  "scripts": {
+	"test": "node_modules/.bin/nodeunit test"
+  },
   "keywords": [
     "postgres",
     "pg",
