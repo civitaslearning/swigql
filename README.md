@@ -1,6 +1,7 @@
 # swigql
 
 [![Build Status](https://travis-ci.org/civitaslearning/swigql.png)](https://travis-ci.org/civitaslearning/swigql)
+[![NPM version](https://badge.fury.io/js/swigql.png)](http://badge.fury.io/js/swigql)
 
 [swig](https://github.com/paularmstrong/swig) templating for SQL
 
